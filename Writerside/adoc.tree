@@ -7,25 +7,30 @@
                  start-page="api-docs.md">
 
     <toc-element topic="api-docs.md"/>
-    <toc-element topic="API-quickstart.md"/>
-    <toc-element topic="API-reference.md">
-        <toc-element topic="Pet.md">
+    <toc-element topic="Getting-Started.md"/>
+    <toc-element topic="API_Reference.md">
+        <toc-element topic="Schemas.md">
+            <toc-element topic="VocalBlockForUpdateDto.md"/>
+            <toc-element topic="VocalBlockForCreationDto.md"/>
+            <toc-element topic="VocalBlockDto.md"/>
+            <toc-element topic="ProjectsWithoutVocalBlocksDto.md"/>
+            <toc-element topic="ProjectForCreationDto.md"/>
+            <toc-element topic="ProblemDetails.md"/>
+            <toc-element topic="OperationType.md"/>
+            <toc-element topic="Operation.md"/>
         </toc-element>
-        <toc-element toc-title="Store">
-            <toc-element topic="Returns-pet-inventories-by-status.md"/>
-            <toc-element topic="Place-an-order-for-a-pet.md"/>
-            <toc-element topic="Find-purchase-order-by-ID.md"/>
-            <toc-element topic="Delete-purchase-order-by-ID.md"/>
-        </toc-element>
-        <toc-element toc-title="User">
-            <toc-element topic="Create-user.md"/>
-            <toc-element topic="Creates-list-of-users-with-given-input-array.md"/>
-            <toc-element topic="Logs-user-into-the-system.md"/>
-            <toc-element topic="Logs-out-current-logged-in-user-session.md"/>
-            <toc-element topic="Get-user-by-user-name.md"/>
-            <toc-element topic="Update-user.md"/>
-            <toc-element topic="Delete-user.md"/>
-        </toc-element>
+        <toc-element topic="Partially_updates_an_existing_vocal_block_for_a_specified_project_.md"/>
+        <toc-element topic="Deletes_a_specific_vocal_block_for_a_specified_project_.md"/>
+        <toc-element topic="Updates_an_existing_vocal_block_for_a_specified_project_.md"/>
+        <toc-element topic="Retrieves_a_specific_vocal_block_for_a_specified_project_.md"/>
+        <toc-element topic="Creates_a_new_vocal_block_for_a_specified_project_.md"/>
+        <toc-element topic="Retrieves_all_vocal_blocks_for_a_specified_project_.md"/>
+        <toc-element topic="Retrieves_a_project_by_its_ID_.md"/>
+        <toc-element topic="Creates_a_new_project_.md"/>
+        <toc-element topic="Retrieves_a_list_of_projects_with_optional_filtering_searching_and_pagination_.md"/>
     </toc-element>
-    <toc-element topic="Changes.md"/>
+    <toc-element topic="Endpoints.md"/>
+    <toc-element topic="Guides.md"/>
+    <toc-element topic="FAQs.md"/>
+    <toc-element topic="API-quickstart.md"/>
 </instance-profile>
