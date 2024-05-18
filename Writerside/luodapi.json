@@ -134,7 +134,7 @@
           "Projects"
         ],
         "summary": "Creates a new project.",
-        "description": "Sample request:\r\n            \r\n    POST /projects\r\n    {\r\n       \"name\": \"New Project\",\r\n       \"description\": \"This is a project.\"\r\n    }",
+        "description": "Sample request:\r\n\r\n    POST /projects\r\n    {\r\n       \"name\": \"New Project\",\r\n       \"description\": \"This is a project.\"\r\n    }",
         "requestBody": {
           "description": "The project data transfer object containing the details of the project to create.",
           "content": {
@@ -218,12 +218,13 @@
           "Projects"
         ],
         "summary": "Retrieves a project by its ID.",
-        "description": "Sample request:\r\n            \r\n    GET /projects/1?includeVocalBlocks=true",
+        "description": "Sample request:\r\n\r\n    GET /projects/1?includeVocalBlocks=true",
         "operationId": "GetProject",
         "parameters": [
           {
             "name": "projectId",
             "in": "path",
+            "description": "The ID of the project to retrieve.",
             "required": true,
             "schema": {
               "type": "integer",
