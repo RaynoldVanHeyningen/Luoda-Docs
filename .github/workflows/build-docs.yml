@@ -11,7 +11,7 @@ permissions:
 
 env:
   INSTANCE: 'Writerside/adoc'
-  ARTIFACT: 'webHelpADOCS2-all.zip'
+  ARTIFACT: 'webHelpADOC2-all.zip'
   DOCKER_VERSION: '241.15989'
 
 jobs:
