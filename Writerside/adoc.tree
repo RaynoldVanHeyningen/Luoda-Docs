@@ -30,7 +30,9 @@
         <toc-element topic="Retrieves_a_list_of_projects_with_optional_filtering_searching_and_pagination_.md"/>
     </toc-element>
     <toc-element topic="Endpoints.md"/>
-    <toc-element topic="Guides.md"/>
+    <toc-element topic="Guides.md">
+        <toc-element topic="Authenticate.md"/>
+    </toc-element>
     <toc-element topic="FAQs.md"/>
     <toc-element topic="API-quickstart.md"/>
 </instance-profile>
