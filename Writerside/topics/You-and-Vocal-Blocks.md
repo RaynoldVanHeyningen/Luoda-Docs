@@ -8,8 +8,6 @@ This guide provides a detailed explanation of how to work with Vocal Blocks in t
 2. **Understanding Vocal Blocks in Luoda**
 3. **Creating a Vocal Block**
 4. **Retrieving Vocal Blocks**
-5. **Updating Vocal Blocks**
-6. **Deleting Vocal Blocks**
 
 ## Prerequisites
 
@@ -131,112 +129,6 @@ response.EnsureSuccessStatusCode();
 
 var content = await response.Content.ReadAsStringAsync();
 var vocalBlock = JsonConvert.DeserializeObject<VocalBlockDto>(content);
-```
-
-## 4. Updating Vocal Blocks
-
-### Full Update
-
-#### Endpoint {id="endpoint_4"}
-
-```
-PUT /api/v1/projects/{projectId}/vocalblocks/{vocalBlockId}
-```
-
-### Sample Request {id="sample-request_4"}
-
-```json
-{
-  "name": "Updated Chorus",
-  "description": "This is the updated chorus of the song.",
-  "category": "Chorus",
-  "lyrics": "These are the updated lyrics of the chorus."
-}
-```
-
-### Example in .NET {id="example-in-net_4"}
-
-```C#
-var client = new HttpClient();
-client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_BEARER_TOKEN");
-client.DefaultRequestHeaders.Add("XApiKey", "YOUR_API_KEY");
-
-var content = new StringContent(JsonConvert.SerializeObject(new
-{
-    name = "Updated Chorus",
-    description = "This is the updated chorus of the song.",
-    category = "Chorus",
-    lyrics = "These are the updated lyrics of the chorus."
-}), Encoding.UTF8, "application/json");
-
-var response = await client.PutAsync("https://yourapiurl/api/v1/projects/1/vocalblocks/1", content);
-response.EnsureSuccessStatusCode();
-```
-
-### Partial Update
-
-#### Endpoint {id="endpoint_5"}
-
-```
-PATCH /api/v1/projects/{projectId}/vocalblocks/{vocalBlockId}
-```
-
-### Sample Request {id="sample-request_5"}
-
-```json
-[
-  {
-    "op": "replace",
-    "path": "/name",
-    "value": "Updated Chorus Name"
-  }
-]
-```
-
-### Example in .NET {id="example-in-net_5"}
-
-```C#
-var client = new HttpClient();
-client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_BEARER_TOKEN");
-client.DefaultRequestHeaders.Add("XApiKey", "YOUR_API_KEY");
-
-var content = new StringContent(JsonConvert.SerializeObject(new[]
-{
-    new
-    {
-        op = "replace",
-        path = "/name",
-        value = "Updated Chorus Name"
-    }
-}), Encoding.UTF8, "application/json-patch+json");
-
-var response = await client.PatchAsync("https://yourapiurl/api/v1/projects/1/vocalblocks/1", content);
-response.EnsureSuccessStatusCode();
-```
-
-## 5. Deleting Vocal Blocks
-
-### Endpoint {id="endpoint_6"}
-
-```
-DELETE /api/v1/projects/{projectId}/vocalblocks/{vocalBlockId}
-```
-
-### Example in .NET {id="example-in-net_6"}
-
-```C#
-var client = new HttpClient();
-client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_BEARER_TOKEN");
-client.DefaultRequestHeaders.Add("XApiKey", "YOUR_API_KEY");
-
-var response = await client.DeleteAsync("https://yourapiurl/api/v1/projects/1/vocalblocks/1");
-response.EnsureSuccessStatusCode();
-```
-
-### Expected Response {id="expected-response_6"}
-
-```
-204 No Content
 ```
 
 ## Conclusion
