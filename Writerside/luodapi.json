@@ -6,7 +6,29 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/v1/projects": {
+    "/webhooks/clerk": {
+      "post": {
+        "tags": [
+          "ClerkWebhook"
+        ],
+        "summary": "Handles incoming webhooks from Clerk.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/projects": {
       "get": {
         "tags": [
           "Projects"
@@ -212,7 +234,7 @@
         }
       }
     },
-    "/api/v1/projects/{projectId}": {
+    "/v1/projects/{projectId}": {
       "get": {
         "tags": [
           "Projects"
@@ -227,8 +249,8 @@
             "description": "The ID of the project to retrieve.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -308,7 +330,70 @@
         }
       }
     },
-    "/api/v1/projects/{projectId}/vocalblocks": {
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieves a user by their ID.",
+        "operationId": "GetUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}/vocalblocks": {
       "get": {
         "tags": [
           "VocalBlocks"
@@ -322,8 +407,8 @@
             "description": "The ID of the project for which to retrieve vocal blocks.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -418,8 +503,8 @@
             "description": "The ID of the project to add the vocal block to.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -527,7 +612,7 @@
         }
       }
     },
-    "/api/v1/projects/{projectId}/vocalblocks/{vocalBlockId}": {
+    "/v1/projects/{projectId}/vocalblocks/{vocalBlockId}": {
       "get": {
         "tags": [
           "VocalBlocks"
@@ -542,8 +627,8 @@
             "description": "The ID of the project containing the vocal block.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -552,8 +637,8 @@
             "description": "The ID of the vocal block to retrieve.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -633,8 +718,8 @@
             "description": "The ID of the project containing the vocal block.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -643,8 +728,8 @@
             "description": "The ID of the vocal block to update.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -737,8 +822,8 @@
             "description": "The ID of the project containing the vocal block.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -747,8 +832,8 @@
             "description": "The ID of the vocal block to update.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -892,8 +977,8 @@
             "description": "The ID of the project containing the vocal block.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -902,8 +987,8 @@
             "description": "The ID of the vocal block to delete.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -947,6 +1032,32 @@
   },
   "components": {
     "schemas": {
+      "ClipDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vocalBlockId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "audioUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "refunded": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Operation": {
         "type": "object",
         "properties": {
@@ -1020,65 +1131,85 @@
           "name": {
             "maxLength": 50,
             "minLength": 1,
-            "type": "string",
-            "description": "Gets or sets the name of the project."
+            "type": "string"
           },
           "description": {
             "maxLength": 200,
             "type": "string",
-            "description": "Gets or sets the description of the project.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "Data transfer object for creating a new project."
+        "additionalProperties": false
       },
       "ProjectsWithoutVocalBlocksDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "Gets or sets the unique identifier of the project.",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string",
-            "description": "Gets or sets the name of the project.",
             "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "Gets or sets the description of the project.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "Data transfer object for projects without vocal blocks."
+        "additionalProperties": false
+      },
+      "VocalBlockCategory": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "VocalBlockDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "Gets or sets the vocal block ID.",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string",
-            "description": "Gets or sets the name of the vocal block.",
             "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "Gets or sets the description of the vocal block.",
+            "nullable": true
+          },
+          "category": {
+            "$ref": "#/components/schemas/VocalBlockCategory"
+          },
+          "lyrics": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/VocalBlockStatus"
+          },
+          "clips": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClipDto"
+            },
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "Data transfer object for representing a vocal block."
+        "additionalProperties": false
       },
       "VocalBlockForCreationDto": {
         "required": [
+          "category",
+          "lyrics",
           "name"
         ],
         "type": "object",
@@ -1086,18 +1217,23 @@
           "name": {
             "maxLength": 50,
             "minLength": 1,
-            "type": "string",
-            "description": "Gets or sets the name of the vocal block."
+            "type": "string"
           },
           "description": {
             "maxLength": 200,
             "type": "string",
-            "description": "Gets or sets the description of the vocal block.",
             "nullable": true
+          },
+          "category": {
+            "$ref": "#/components/schemas/VocalBlockCategory"
+          },
+          "lyrics": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "Data transfer object for creating a new vocal block."
+        "additionalProperties": false
       },
       "VocalBlockForUpdateDto": {
         "required": [
@@ -1108,18 +1244,25 @@
           "name": {
             "maxLength": 50,
             "minLength": 1,
-            "type": "string",
-            "description": "Gets or sets the name of the vocal block."
+            "type": "string"
           },
           "description": {
             "maxLength": 200,
             "type": "string",
-            "description": "Gets or sets the description of the vocal block.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "Data transfer object for updating an existing vocal block."
+        "additionalProperties": false
+      },
+      "VocalBlockStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       }
     },
     "securitySchemes": {

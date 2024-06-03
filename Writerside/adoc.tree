@@ -31,6 +31,7 @@
     </toc-element>
     <toc-element topic="Endpoints.md"/>
     <toc-element topic="Guides.md">
+        <toc-element topic="Handling-Payments.md"/>
         <toc-element topic="Authenticate.md"/>
         <toc-element topic="Create-a-new-project.md"/>
         <toc-element topic="You-and-Vocal-Blocks.md"/>

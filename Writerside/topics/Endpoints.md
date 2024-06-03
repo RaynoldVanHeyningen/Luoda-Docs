@@ -13,11 +13,11 @@ Authorization: Bearer your_bearer_token
 
 ```json
 [
-    {
-        "id": 1,
-        "name": "Project 1",
-        "description": "Description of Project 1"
-    }
+  {
+    "id": "59065bc4-b318-4955-8dfc-c8ed5705b229",
+    "name": "Project 1",
+    "description": "Description of Project 1"
+  }
 ]
 ```
 
@@ -40,8 +40,12 @@ Content-Type: application/json
 
 ```json
 {
-    "id": 2,
-    "name": "New Project",
-    "description": "Description of the new project"
+  "id": "59065bc4-b318-4955-8dfc-c8ed5705b229",
+  "name": "Project Test",
+  "description": "Famous project.",
+  "numberOfVocalBlocks": 0,
+  "vocalBlocks": [],
+  "bpm": 0,
+  "musicalKey": null
 }
 ```
